@@ -1,0 +1,10 @@
+docker pull centos:7.2.1511    //也可以不指定版本,默认最新latest
+docker run -t -i centos:7.2.1511 /bin/bash  //启动并进入docker 容器
+yum install wget     　　　　　　　　　　　　　　　
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo  
+yum cleal all
+yum install passwd
+yum install openssh-server        #安装ssh服务端
+echo 'passw0rd' | passwd root    //修改root密码
+docker commit [容器ID] [新镜像名]   //使用commit 提交,简单的配置可以使用dockerfile创建镜像,但是要配置环境比较复杂,还是需要用到commit
+docker run -d -p 220:22 c7ssh /usr/sbin/sshd -D　　　　　　//启动容器,并绑定容器端口22到宿主主机, 可以有多个-p 绑定多个端口,例如22端口让远程客户端连接,8080 可以访问容器内tomcat
